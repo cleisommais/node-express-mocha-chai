@@ -10,7 +10,8 @@ export default class UserService {
         try {
             return [...this.users.values()];
         } catch (err) {
-            console.log(colors.red(err));
+            console.log(colors.red(err.message));
+            console.log(colors.red(err.statusCode));
             throw new ErrorResponseApp(
                 err.message || 'Error when try to get all',
                 err.statusCode || 400
@@ -19,12 +20,16 @@ export default class UserService {
     }
     async createUser(bodyRequest) {
         try {
+            if (!bodyRequest) {
+                throw new ErrorResponseApp('Body request missing', 400);
+            }
             const id = uuidv4();
             bodyRequest.id = id;
             this.users.set(id, bodyRequest);
             return this.users.get(id);
         } catch (err) {
-            console.log(colors.red(err));
+            console.log(colors.red(err.message));
+            console.log(colors.red(err.statusCode));
             throw new ErrorResponseApp(
                 err.message || 'Error when try to create',
                 err.statusCode || 400
@@ -38,7 +43,8 @@ export default class UserService {
             }
             return this.users.get(id);
         } catch (err) {
-            console.log(colors.red(err));
+            console.log(colors.red(err.message));
+            console.log(colors.red(err.statusCode));
             throw new ErrorResponseApp(
                 err.message || 'Error when try to get by id',
                 err.statusCode || 400
@@ -47,6 +53,9 @@ export default class UserService {
     }
     async updateUserById(id, bodyRequest) {
         try {
+            if (!bodyRequest) {
+                throw new ErrorResponseApp('Body request missing', 400);
+            }
             if (!this.users.has(id)) {
                 throw new ErrorResponseApp(`Id ${id} not found`, 404);
             }
@@ -54,7 +63,8 @@ export default class UserService {
             this.users.set(id, bodyRequest);
             return this.users.get(id);
         } catch (err) {
-            console.log(colors.red(err));
+            console.log(colors.red(err.message));
+            console.log(colors.red(err.statusCode));
             throw new ErrorResponseApp(
                 err.message || 'Error when try to update by id',
                 err.statusCode || 400
@@ -67,9 +77,10 @@ export default class UserService {
                 throw new ErrorResponseApp(`Id ${id} not found`, 404);
             }
             this.users.delete(id);
-            return this.users.get(id);
+            return null;
         } catch (err) {
-            console.log(colors.red(err));
+            console.log(colors.red(err.message));
+            console.log(colors.red(err.statusCode));
             throw new ErrorResponseApp(
                 err.message || 'Error when try to delete by id',
                 err.statusCode || 400
