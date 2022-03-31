@@ -7,6 +7,21 @@
 	"item": [
 		{
 			"name": "localhost:3000/api/v1/users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.collectionVariables.set(\"id\", jsonData.data.id);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -36,6 +51,19 @@
 		},
 		{
 			"name": "localhost:3000/api/v1/users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -56,11 +84,24 @@
 		},
 		{
 			"name": "localhost:3000/api/v1/users/d80cf95b-9fd5-4bd0-9426-61138d612fee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:3000/api/v1/users/d80cf95b-9fd5-4bd0-9426-61138d612fee",
+					"raw": "localhost:3000/api/v1/users/{{id}}",
 					"host": [
 						"localhost"
 					],
@@ -69,7 +110,7 @@
 						"api",
 						"v1",
 						"users",
-						"d80cf95b-9fd5-4bd0-9426-61138d612fee"
+						"{{id}}"
 					]
 				}
 			},
@@ -77,6 +118,19 @@
 		},
 		{
 			"name": "localhost:3000/api/v1/users/d80cf95b-9fd5-4bd0-9426-61138d612fee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 202\", function () {\r",
+							"    pm.response.to.have.status(202);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "PUT",
 				"header": [],
@@ -90,7 +144,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/api/v1/users/d80cf95b-9fd5-4bd0-9426-61138d612fee",
+					"raw": "localhost:3000/api/v1/users/{{id}}",
 					"host": [
 						"localhost"
 					],
@@ -99,7 +153,7 @@
 						"api",
 						"v1",
 						"users",
-						"d80cf95b-9fd5-4bd0-9426-61138d612fee"
+						"{{id}}"
 					]
 				}
 			},
@@ -107,11 +161,24 @@
 		},
 		{
 			"name": "localhost:3000/api/v1/users/d80cf95b-9fd5-4bd0-9426-61138d612fee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "localhost:3000/api/v1/users/d80cf95b-9fd5-4bd0-9426-61138d612fee",
+					"raw": "localhost:3000/api/v1/users/{{id}}",
 					"host": [
 						"localhost"
 					],
@@ -120,11 +187,17 @@
 						"api",
 						"v1",
 						"users",
-						"d80cf95b-9fd5-4bd0-9426-61138d612fee"
+						"{{id}}"
 					]
 				}
 			},
 			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": ""
 		}
 	]
 }

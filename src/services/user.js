@@ -20,7 +20,7 @@ export default class UserService {
     }
     async createUser(bodyRequest) {
         try {
-            if (!bodyRequest) {
+            if (!bodyRequest || Object.keys(bodyRequest).length === 0) {
                 throw new ErrorResponseApp('Body request missing', 400);
             }
             const id = uuidv4();
@@ -53,7 +53,7 @@ export default class UserService {
     }
     async updateUserById(id, bodyRequest) {
         try {
-            if (!bodyRequest) {
+            if (!bodyRequest || Object.keys(bodyRequest).length === 0) {
                 throw new ErrorResponseApp('Body request missing', 400);
             }
             if (!this.users.has(id)) {

@@ -4,7 +4,7 @@
     "description": "",
     "main": "server.js",
     "scripts": {
-        "test": "set NODE_ENV=test && mocha test/**/*.test.js --require @babel/register",
+        "test": "set NODE_ENV=test && set PORT=3003 && mocha test/**/*.test.js --require @babel/register",
         "dev": "nodemon --exec babel-node src/server",
         "formatter": "prettier --write ."
     },
@@ -34,3 +34,4 @@
         "uuid": "^8.3.2"
     }
 }
+
