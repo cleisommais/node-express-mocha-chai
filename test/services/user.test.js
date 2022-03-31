@@ -7,12 +7,12 @@ const userService = new UserService();
 let id = null;
 
 describe('Testing UserService', () => {
-    it('Testing getUsers with empty response', async () => {
+    it('Testing UserService getUsers with empty response', async () => {
         const options = {};
         const response = await userService.getUsers(options);
         chai.expect(response).to.deep.equal([]);
     });
-    it('Testing getUsers with 2 items on the  response', async () => {
+    it('Testing UserService getUsers with 2 items on the  response', async () => {
         let id = uuidv4();
         userService.users.set(id, {
             id,
@@ -32,7 +32,7 @@ describe('Testing UserService', () => {
         chai.expect(response.length).to.deep.equal(2);
         userService.users.clear();
     });
-    it('Testing createUser', async () => {
+    it('Testing UserService createUser', async () => {
         const bodyRequest = {
             name: 'Cleison',
             age: 39,
@@ -47,25 +47,25 @@ describe('Testing UserService', () => {
         chai.expect(response.id).to.not.equal(undefined);
         id = response.id;
     });
-    it('Testing createUser when bodyRequest is null', async () => {
+    it('Testing UserService createUser when bodyRequest is null', async () => {
         const bodyRequest = null;
         await chai
             .expect(userService.createUser(bodyRequest))
             .to.be.rejectedWith('Body request missing');
     });
-    it('Testing getUserById', async () => {
+    it('Testing UserService getUserById', async () => {
         const response = await userService.getUserById(id);
         chai.expect(response).to.have.property('id');
         chai.expect(response).to.have.property('name');
         chai.expect(response).to.have.property('age');
         chai.expect(response).to.have.property('email');
     });
-    it('Testing getUserById when id is wrong', async () => {
+    it('Testing UserService getUserById when id is wrong', async () => {
         await chai
             .expect(userService.getUserById(123))
             .to.be.rejectedWith('Id 123 not found');
     });
-    it('Testing updateUserById', async () => {
+    it('Testing UserService updateUserById', async () => {
         const bodyRequest = {
             name: 'Cleison Melo',
             age: 40,
@@ -78,7 +78,7 @@ describe('Testing UserService', () => {
         chai.expect(response).to.have.property('age');
         chai.expect(response).to.have.property('email');
     });
-    it('Testing updateUserById when id is wrong', async () => {
+    it('Testing UserService updateUserById when id is wrong', async () => {
         const bodyRequest = {
             name: 'Cleison Melo',
             age: 40,
@@ -88,17 +88,17 @@ describe('Testing UserService', () => {
             .expect(userService.updateUserById(123, bodyRequest))
             .to.be.rejectedWith('Id 123 not found');
     });
-    it('Testing updateUserById when bodyRequest is null', async () => {
+    it('Testing UserService updateUserById when bodyRequest is null', async () => {
         const bodyRequest = null;
         await chai
             .expect(userService.updateUserById(id, bodyRequest))
             .to.be.rejectedWith('Body request missing');
     });
-    it('Testing deleteUserById', async () => {
+    it('Testing UserService deleteUserById', async () => {
         const response = await userService.deleteUserById(id);
         chai.expect(response).to.deep.equal(null);
     });
-    it('Testing deleteUserById when id is wrong', async () => {
+    it('Testing UserService deleteUserById when id is wrong', async () => {
         await chai
             .expect(userService.deleteUserById(123))
             .to.be.rejectedWith('Id 123 not found');
