@@ -2,10 +2,13 @@ import colors from 'colors';
 import express from 'express';
 import dotenv from 'dotenv';
 import logger from 'morgan';
+import ConnDB from '../src/conn/db';
 //Load env vars
 dotenv.config();
 const PORT = process.env.PORT || 3000;
 const NODE_ENV = process.env.NODE_ENV || 'development';
+//Open connection with DB
+new ConnDB().connect();
 //Route files
 import userRouter from './routes/user';
 //App setup
