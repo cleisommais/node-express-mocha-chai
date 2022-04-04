@@ -8,7 +8,11 @@ dotenv.config();
 const PORT = process.env.PORT || 3000;
 const NODE_ENV = process.env.NODE_ENV || 'development';
 //Open connection with DB
-new ConnDB().connect();
+let dbConn = null;
+(async () => {
+    dbConn = await new ConnDB().connect();
+})();
+
 //Route files
 import userRouter from './routes/user';
 //App setup
@@ -43,4 +47,4 @@ process.on('unhandledRejection', (err, promise) => {
         process.exit(1);
     });
 });
-export { app, server };
+export { app, server, dbConn };
