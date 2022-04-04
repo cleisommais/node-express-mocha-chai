@@ -4,7 +4,7 @@
     "description": "",
     "main": "server.js",
     "scripts": {
-        "test": "set NODE_ENV=test && set PORT=3003 && mocha test/**/*.test.js --require @babel/register",
+        "test": "set NODE_ENV=test && set PORT=3003 && mocha test/**/*.test.js --require @babel/register --exit",
         "dev": "nodemon --exec babel-node src/server",
         "formatter": "prettier --write ."
     },
